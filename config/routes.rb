@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
-  resources :posts
+  resources :posts do
+    member do
+      post :change_status
+    end
+    collection do
+      post :recent
+    end
+  end
   resources :users
+
+  get '/payments', to: 'payments#index'
+  post '/payments', to: 'payments#create', as: :create_payments
 
   get "posts/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

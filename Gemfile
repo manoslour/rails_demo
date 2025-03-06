@@ -65,3 +65,5 @@ end
 gem "bcrypt", "~> 3.1"
 
 gem "rspec-rails", "~> 7.1", :groups => [:development, :test]
+
+gem "byebug", "~> 11.1", :groups => [:test, :development]

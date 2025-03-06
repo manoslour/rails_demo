@@ -4,13 +4,16 @@
 
 <h1>Posts</h1>
 
+<% local = 1 %>
 <div id="posts">
   <% @posts.each do |post| %>
     <%= render post %>
     <p>
-      <%= link_to "Show this post", post %>
+      <%= link_to "Show this post #{local}", post %>
     </p>
-  <% end %>
+    <% local += 1 %>
+ <% end %>
+
 </div>
 
 <%= link_to "New post", new_post_path %>
