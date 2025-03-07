@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = Post.new(title: "Default Title")
   end
 
   # GET /posts/1/edit
@@ -21,18 +21,10 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    service = CreatePostService.apply(post_params, user: User.first)
-    @post = service.post
-
-    respond_to do |format|
-      if service.save
-        format.html { redirect_to service.post, notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: service.post }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: service.post.errors, status: :unprocessable_entity }
-      end
-    end
+    @post = Post.new(post_params)
+    @post.user = User.first
+    @post.save
+    redirect_to post_path(id: @post.id)
   end
 
   # PATCH/PUT /posts/1 or /posts/1.json
@@ -59,13 +51,14 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params.expect(:id))
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params.expect(:id))
+  end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.expect(post: [ :title, :content ])
-    end
+  # Only allow a list of trusted parameters through.
+  def post_params
+    # params.require(:post).permit(:title, :content)
+    params.expect(post: [:title, :content])
+  end
 end
