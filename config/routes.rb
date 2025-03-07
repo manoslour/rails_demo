@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "module3", to: 'home#module3'
   resources :posts do
     member do
       post :change_status

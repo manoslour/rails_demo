@@ -1,0 +1,28 @@
+<ul>
+  <% @users.each do |user| %>
+    <li><%= user[:name] %></li>
+  <% end %>
+</ul>
+
+<% @apple = Post.first %>
+<%= render @apple %>
+<%= render partial: "shared/shared_partial" %>
+
+<hr>
+
+<%= "Hello world#{}" %>
+
+<% @posts = Post.all %>
+<%# @posts.each do |post| %>
+  <%#= render post %>
+  <%#= render partial: "#{apple.class.model_name.plural}/#{apple.class.model_name.singular}",
+             locals: { apple.class.model_name.singular.to_sym => apple } %>
+  <%#= render partial: "posts/post", locals: { :post => apple } %>
+<%# end %>
+
+<% @posts.each do |post| %>
+  <%= render post %>
+<% end %>
+<%# collection = [Post.first, User.first] %>
+<%#= render partial: "posts/post", collection: @posts, as: :blog_post %>
+<%#= render collection %>
