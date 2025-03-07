@@ -67,3 +67,7 @@ gem "bcrypt", "~> 3.1"
 gem "rspec-rails", "~> 7.1", :groups => [:development, :test]
 
 gem "byebug", "~> 11.1", :groups => [:test, :development]
+
+gem "dartsass-rails", "~> 0.5.1"
+
+gem "bootstrap", "~> 5.3"
