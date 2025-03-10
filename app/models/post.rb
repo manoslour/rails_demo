@@ -14,4 +14,12 @@ class Post < ApplicationRecord
   scope :empty, -> { where(content: ["", nil]) } # content is null OR content = ""
 
   enum :status, %i[draft visible archived] # %i defines options as symbols
+
+  before_validation :set_published_at
+
+  private
+
+  def set_published_at
+    self.published_at ||= Time.zone.now
+  end
 end
