@@ -23,8 +23,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = User.first
-    @post.save
-    redirect_to post_path(id: @post.id)
+    if @post.save
+      redirect_to post_path(id: @post.id)
+    else
+      render :new, status: :unprocessable_entity # status code is
+    end
   end
 
   # PATCH/PUT /posts/1 or /posts/1.json

@@ -1,16 +1,24 @@
 <%= form_with(model: post) do |f| %>
+  <% f.object.errors.full_messages.each do |error_message| %>
+    <div class="alert alert-danger">
+      <%= error_message %>
+    </div>
+  <% end %>
   <div class="d-grid gap-3">
     <div>
-      <%= f.label :title %><br/>
+      <%= f.label :title %>
       <%= f.text_field :title, class: 'form-control' %>
     </div>
     <div>
-      <%= f.label :published_at %><br/>
+      <%= f.label :published_at %>
       <%= f.date_field :published_at, class: 'form-control' %>
     </div>
     <div>
-      <%= f.label :content %><br/>
+      <%= f.label :content %>
       <%= f.text_field :content, class: 'form-control' %>
+      <% if f.object.errors[:content].present? %>
+        <p class="small text-danger"><%= f.object.errors[:content].join(", ") %></p>
+      <% end %>
     </div>
   </div>
 
