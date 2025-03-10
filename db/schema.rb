@@ -10,18 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_07_145039) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_10_103120) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "comments", force: :cascade do |t|
+    t.text "content"
     t.bigint "user_id"
-    t.bigint "post_id"
-    t.text "content", null: false
+    t.string "commentable_type"
+    t.bigint "commentable_id"
     t.boolean "banned", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -31,6 +32,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_07_145039) do
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "published_at"
+    t.integer "status", default: 0
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
