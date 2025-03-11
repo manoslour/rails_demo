@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get "module3", to: 'home#module3'
   get "module5", to: 'home#module5'
 
