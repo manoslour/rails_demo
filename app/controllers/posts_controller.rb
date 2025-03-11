@@ -36,10 +36,8 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     if @post.destroy
-      flash[:success] = "Post deleted"
-      redirect_to posts_path
+      redirect_to posts_path, notice: 'Post was successfully destroyed.'
     else
-      flash[:danger] = "Could not delete post"
       render :show, status: :unprocessable_entity
     end
   end

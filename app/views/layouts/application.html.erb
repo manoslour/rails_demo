@@ -22,11 +22,8 @@
   </head>
 
   <body>
-    <% if flash[:success] %>
-      <div class="alert alert-info"><%= flash[:success] %></div>
-    <% end %>
-    <% if flash[:danger] %>
-      <div class="alert alert-danger"><%= flash[:danger] %></div>
+    <% if notice %>
+      <div class="alert alert-info"><%= notice %></div>
     <% end %>
     <%= render "shared/nav" %>
     <section>

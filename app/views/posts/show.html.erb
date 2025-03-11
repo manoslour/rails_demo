@@ -1,4 +1,4 @@
-<div class="container pt-4">
+ <div class="container pt-4">
   <div class="row justify-content-center">
     <div class="col-lg-6">
       <h1><%= @post.title %></h1>
@@ -7,7 +7,7 @@
       <hr>
       <div class="d-flex justify-content-between">
         <%= link_to "Edit post", edit_post_path(@post) %>
-        <%= button_to "Delete post", post_path(@post), method: :delete, class: "btn btn-danger" %>
+        <%= button_to "Delete post", post_path(@post), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
       </div>
     </div>
   </div>
