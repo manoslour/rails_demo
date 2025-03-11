@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-
+    @posts = Post.published
   end
 
   def new
@@ -30,6 +30,17 @@ class PostsController < ApplicationController
       redirect_to @post
     else
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      flash[:success] = "Post deleted"
+      redirect_to posts_path
+    else
+      flash[:danger] = "Could not delete post"
+      render :show, status: :unprocessable_entity
     end
   end
 

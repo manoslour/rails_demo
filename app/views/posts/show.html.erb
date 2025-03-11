@@ -5,7 +5,10 @@
       <%= simple_format @post.content %>
 
       <hr>
-      <%= link_to "Edit post", edit_post_path(@post) %>
+      <div class="d-flex justify-content-between">
+        <%= link_to "Edit post", edit_post_path(@post) %>
+        <%= button_to "Delete post", post_path(@post), method: :delete, class: "btn btn-danger" %>
+      </div>
     </div>
   </div>
 </div>

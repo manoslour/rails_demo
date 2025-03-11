@@ -1,4 +1,9 @@
 <div class="container pt-4">
   <h1>Posts</h1>
+  <%#= render @posts %>
+  <div class="row">
+    <%= render partial: "posts/post", collection: @posts, as: :post %>
+  </div>
+  <hr>
   <%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
 </div>
