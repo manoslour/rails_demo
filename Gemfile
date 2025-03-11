@@ -71,3 +71,5 @@ gem "byebug", "~> 11.1", :groups => [:test, :development]
 gem "dartsass-rails", "~> 0.5.1"
 
 gem "bootstrap", "~> 5.3"
+
+gem "devise", "~> 4.9"
