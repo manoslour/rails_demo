@@ -1,0 +1,21 @@
+<% post ||= @post %>
+
+<%= form_with model: post do |f| %>
+  <div class="d-grid gap-2">
+    <div>
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <div>
+      <%= f.label :content %>
+      <%= f.text_area :content, class: "form-control" %>
+    </div>
+    <div>
+      <%= f.label :status %>
+      <%= f.select :status, Post.statuses.map{ |key, value| [key.capitalize, key] }, { prompt: "No selection" },
+                   class: "form-control" %>
+    </div>
+
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

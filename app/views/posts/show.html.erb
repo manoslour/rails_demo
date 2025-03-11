@@ -1,0 +1,11 @@
+<div class="container pt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <h1><%= @post.title %></h1>
+      <%= simple_format @post.content %>
+
+      <hr>
+      <%= link_to "Edit post", edit_post_path(@post) %>
+    </div>
+  </div>
+</div>
