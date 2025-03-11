@@ -22,6 +22,9 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    if @post.sections.empty?
+      3.times { @post.sections.build }
+    end
   end
 
   def update
@@ -45,6 +48,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.expect(post: [:title, :content, :status])
+    params.expect(post: [:title, :content, :status, sections_attributes: [[:id, :content, :section_type]] ])
   end
 end

@@ -21,6 +21,15 @@
                    class: "form-control" %>
     </div>
 
+    <div>
+      <%= f.fields_for :sections do |section_f| %>
+        <div>
+          <%= section_f.label :content %>
+          <%= section_f.text_area :content, class: 'form-control' %>
+        </div>
+      <% end %>
+    </div>
+
     <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

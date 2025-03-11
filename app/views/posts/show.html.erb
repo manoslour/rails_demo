@@ -4,6 +4,9 @@
       <h1><%= @post.title %></h1>
       <%= simple_format @post.content %>
 
+      <% @post.sections.each do |section| %>
+        <%= simple_format section.content %>
+      <% end %>
       <hr>
       <div class="d-flex justify-content-between">
         <%= link_to "Edit post", edit_post_path(@post) %>
