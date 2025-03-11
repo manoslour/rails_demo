@@ -2,6 +2,7 @@
   <div class="card mb-3">
     <div class="card-body">
       <h2><%= post.title %></h2>
+      <p class="text-muted small">by: <%= post.user&.email %></p>
       <%= link_to "Read more", post_path(post), class: "btn btn-link" %>
     </div>
   </div>
