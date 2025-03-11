@@ -7,11 +7,13 @@
       <% @post.sections.each do |section| %>
         <%= simple_format section.content %>
       <% end %>
-      <hr>
-      <div class="d-flex justify-content-between">
-        <%= link_to "Edit post", edit_post_path(@post) %>
-        <%= button_to "Delete post", post_path(@post), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
-      </div>
+      <% if current_user && @post.user == current_user %>
+        <hr>
+        <div class="d-flex justify-content-between">
+          <%= link_to "Edit post", edit_post_path(@post) %>
+          <%= button_to "Delete post", post_path(@post), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

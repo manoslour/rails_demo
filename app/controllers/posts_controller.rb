@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :check_owner, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.published
@@ -12,6 +13,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.user = current_user
     if @post.save
       redirect_to @post
     else
@@ -51,5 +53,11 @@ class PostsController < ApplicationController
 
   def post_params
     params.expect(post: [:title, :content, :status, sections_attributes: [[:id, :content, :section_type]] ])
+  end
+
+  def check_owner
+    if current_user != @post.user
+      redirect_to root_path, notice: 'You do not have permission to edit this post'
+    end
   end
 end
