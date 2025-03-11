@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+
   def index
     @posts = Post.published
   end
@@ -16,19 +18,15 @@ class PostsController < ApplicationController
     end
   end
 
-  def show
-    @post = Post.find(params[:id])
-  end
+  def show; end
 
   def edit
-    @post = Post.find(params[:id])
     if @post.sections.empty?
       3.times { @post.sections.build }
     end
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to @post
     else
@@ -37,7 +35,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     if @post.destroy
       redirect_to posts_path, notice: 'Post was successfully destroyed.'
     else
@@ -46,6 +43,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.expect(post: [:title, :content, :status, sections_attributes: [[:id, :content, :section_type]] ])
