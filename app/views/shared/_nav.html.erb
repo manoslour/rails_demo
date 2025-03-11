@@ -12,6 +12,13 @@
         <li class="nav-item">
           <%= link_to "New post", new_post_path, class: "nav-link #{ "active" if current_page?(new_post_path) }" %>
         </li>
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link text-danger" %>
+          <% else %>
+            <%= link_to "Log in", new_user_session_path, class: "nav-link #{ "active" if current_page?(new_user_session_path) }" %>
+          <% end %>
+        </li>
       </ul>
     </div>
   </div>
