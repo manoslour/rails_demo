@@ -2,9 +2,10 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:public, :show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :check_owner, only: [:edit, :update, :destroy]
+  before_action :check_owner_and_status, only: [:show]
 
   def public
-    @posts = Post.includes(:user, :sections).all
+    @posts = Post.includes(:user, :sections).published
     render :index
   end
 
@@ -63,6 +64,12 @@ class PostsController < ApplicationController
   def check_owner
     if current_user != @post.user
       redirect_to root_path, notice: 'You do not have permission to edit this post'
+    end
+  end
+
+  def check_owner_and_status
+    if @post.user != current_user && !@post.published?
+      redirect_to root_path, notice: "You're not allowed"
     end
   end
 end

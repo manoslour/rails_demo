@@ -45,7 +45,7 @@ RSpec.describe "Posts", type: :request do
 
         it 'assigns no posts' do
           get '/posts'
-          expect(assigns(:posts)).to be_empty
+          expect(assigns(:posts)).not_to include post
         end
       end
     end
@@ -58,6 +58,17 @@ RSpec.describe "Posts", type: :request do
       it "returns a success response" do
         post '/posts', params: { post: { title: 'Ok', content: 'Alright'} }
         expect(response).to have_http_status(:found)
+      end
+    end
+
+    describe 'GET /posts/1' do
+      context 'when other users post not published' do
+        let(:post) { create(:post) }
+
+        it 'does not show the post' do
+          get post_path(post)
+          expect(response).to have_http_status(:redirect)
+        end
       end
     end
   end

@@ -7,4 +7,8 @@ class Post < ApplicationRecord
   enum :status, [:draft, :published, :archived]
 
   accepts_nested_attributes_for :sections, reject_if: -> (attributes) { attributes['content'].blank? }
+
+  def user_email
+    user&.email || '(blank)'
+  end
 end
