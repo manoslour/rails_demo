@@ -1,7 +1,9 @@
 FactoryBot.define do
   factory :user do
     username { 'Test' }
-    email { 'test@demo.com' }
+
+    sequence(:email) { |n| "person#{n}@example.com" }
+
     password { '12345678' }
 
     trait :valid do

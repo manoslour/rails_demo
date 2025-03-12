@@ -1,7 +1,12 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:public, :show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :check_owner, only: [:edit, :update, :destroy]
+
+  def public
+    @posts = Post.includes(:user, :sections).published
+    render :index
+  end
 
   def index
     @posts = Post.includes(:user, :sections).all
