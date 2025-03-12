@@ -2,6 +2,10 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :sections, dependent: :destroy
 
+  def sorted_sections
+    sections.sort { |a, b| Section::PRIORITY.index(a.type) <=> Section::PRIORITY.index(b.type) }
+  end
+
   validates_presence_of :title, :content
 
   enum :status, [:draft, :published, :archived]

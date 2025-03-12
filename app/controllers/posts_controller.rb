@@ -58,7 +58,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.expect(post: [:title, :content, :status, sections_attributes: [[:id, :content, :section_type]] ])
+    params.expect(post: [:title, :content, :status, sections_attributes: [[:id, :content, :type]] ])
   end
 
   def check_owner

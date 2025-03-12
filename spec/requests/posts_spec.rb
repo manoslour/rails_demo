@@ -11,6 +11,24 @@ RSpec.describe "Posts", type: :request do
     end
   end
 
+  describe 'GET /post/1 (public)' do
+    context 'with Important sections' do
+      let(:post) do
+        create(:post,
+          sections: [
+            create(:section),
+            create(:section, :important)
+          ]
+        )
+      end
+
+      it "shows important sections first" do
+        get post_path(post)
+        expect(assigns(:post).sorted_sections.first).to be_a Section::Important
+      end
+    end
+  end
+
   context 'User authorized' do
     include_context 'logged in user'
 
@@ -58,7 +76,7 @@ RSpec.describe "Posts", type: :request do
             content: 'Alright',
             sections_attributes: [
               content: 'Test section',
-              section_type: 'Important'
+              type: 'Section::Important'
             ]
           }
         }

@@ -38,7 +38,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_11_134758) do
 
   create_table "sections", force: :cascade do |t|
     t.bigint "post_id", null: false
-    t.integer "section_type"
+    t.string "type", default: "Section::Default"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
