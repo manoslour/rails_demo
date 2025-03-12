@@ -49,6 +49,10 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem "rspec-rails", "~> 7.1"
+  gem "byebug", "~> 11.1"
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -63,10 +67,6 @@ group :test do
 end
 
 gem "bcrypt", "~> 3.1"
-
-gem "rspec-rails", "~> 7.1", :groups => [:development, :test]
-
-gem "byebug", "~> 11.1", :groups => [:test, :development]
 
 gem "dartsass-rails", "~> 0.5.1"
 
