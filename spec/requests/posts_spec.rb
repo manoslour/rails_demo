@@ -6,6 +6,24 @@ RSpec.describe "Posts", type: :request do
       get '/posts'
       expect(response).to have_http_status(:ok)
     end
+
+    context 'when draft post' do
+      let!(:post) { create(:post) }
+
+      it 'assigns draft posts' do
+        get '/posts'
+        expect(assigns(:posts)).to match_array([post])
+      end
+    end
+
+    context 'when published post' do
+      let!(:post) { create(:post, status: :published  ) }
+
+      it 'assigns published posts' do
+        get '/posts'
+        expect(assigns(:posts)).to match_array([post])
+      end
+    end
   end
 
   describe "POST /posts" do
