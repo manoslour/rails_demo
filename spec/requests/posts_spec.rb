@@ -51,13 +51,29 @@ RSpec.describe "Posts", type: :request do
     end
 
     describe "POST /posts" do
-      before do
-        User.create(username: 'Demo', password: '123456')
+      let(:post_params) do
+        {
+          post: {
+            title: 'Ok',
+            content: 'Alright',
+            sections_attributes: [
+              content: 'Test section',
+              section_type: 'Important'
+            ]
+          }
+        }
       end
 
+      let(:sections) { current_user.posts.first.sections }
+
       it "returns a success response" do
-        post '/posts', params: { post: { title: 'Ok', content: 'Alright'} }
+        post '/posts', params: post_params
         expect(response).to have_http_status(:found)
+      end
+
+      it "creates a new post with 1 section" do
+        post '/posts', params: post_params
+        expect(sections.count).to eq(1)
       end
     end
 
