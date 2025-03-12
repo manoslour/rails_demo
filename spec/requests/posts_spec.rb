@@ -1,21 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "Posts", type: :request do
-  describe 'GET /' do
+  describe 'GET / (public)' do
     let!(:post) { create(:post, status: :published)}
+    let!(:post_draft) { create(:post)}
 
-    it "returns a success response" do
+    it "assigns published posts" do
       get '/'
       expect(assigns(:posts)).to match_array([post])
     end
   end
 
   context 'User authorized' do
-    let(:current_user) { create(:user) }
-
-    before do
-      login_as(current_user, scope: :user)
-    end
+    include_context 'logged in user'
 
     describe "GET /index" do
       it "returns a success response" do
@@ -42,13 +39,13 @@ RSpec.describe "Posts", type: :request do
       end
 
       context 'when other users post' do
-        let(:other_other) { create(:user) }
+        let(:user) { create(:user) }
 
-        let!(:post) { create(:post, status: :draft, user: other_other ) }
+        let!(:post) { create(:post, status: :draft, user: user) } # from ruby version 3.1+ user can be ommited
 
-        it 'assigns published posts' do
+        it 'assigns no posts' do
           get '/posts'
-          expect(assigns(:posts)).to match_array([])
+          expect(assigns(:posts)).to be_empty
         end
       end
     end
