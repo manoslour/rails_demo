@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.includes(:user, :sections).all
+    @posts = current_user.posts.includes(:user, :sections).all
   end
 
   def new
