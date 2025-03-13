@@ -14,6 +14,18 @@
           <%= button_to "Delete post", post_path(@post), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
         </div>
       <% end %>
+      <hr>
+      <h3>Comments</h3>
+      <div class="d-grid gap-2 mb-5">
+        <% if @post.comments.present? %>
+          <%= render @post.comments %>
+        <% else %>
+          <p class="text-muted small">No comments on this post yet</p>
+        <% end %>
+        <% if current_user %>
+          <%= render "comments/form", comment: @post.comments.build %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

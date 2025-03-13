@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many :sections, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
 
   def sorted_sections
     sections.sort { |a, b| Section::PRIORITY.index(a.type) <=> Section::PRIORITY.index(b.type) }
