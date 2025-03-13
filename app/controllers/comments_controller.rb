@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
 
   def create
     @comment = Comment.new(comment_params)
@@ -18,6 +18,10 @@ class CommentsController < ApplicationController
 
   def destroy
 
+  end
+
+  def show
+    @comment = Comment.find(params[:id])
   end
 
   private

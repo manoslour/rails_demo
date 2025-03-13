@@ -1,0 +1,8 @@
+<%= turbo_frame_tag @comment do %>
+  <div class="card">
+    <div class="card-body">
+      <%= simple_format @comment.content %>
+      <p class="mb-0 text-muted small">by: <%= current_user && current_user == @comment.user ? "You" : @comment.user.email %></p>
+    </div>
+  </div>
+<% end %>

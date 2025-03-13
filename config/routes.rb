@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "module3", to: 'home#module3'
   get "module5", to: 'home#module5'
 
-  resources :comments, only: [:create, :destroy]
+  resources :comments, only: [:create, :destroy, :show]
 
   get "/posts", to: "posts#index"
   get "/list", to: "posts#list", as: :list_posts
