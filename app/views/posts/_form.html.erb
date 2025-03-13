@@ -1,19 +1,21 @@
 <% post ||= @post %>
 
-<%= form_with model: post, data: { turbo: false } do |f| %>
+<%= form_with model: post, data: { turbo: false, controller: "form", form_title_value: "Some title from js data value" } do |f| %>
   <% f.object.errors.full_messages.each do |message| %>
     <div class="alert alert-danger">
       <%= message %>
     </div>
   <% end %>
   <div class="d-grid gap-2">
+    <button type="button" data-action="form#clearTitle" class="btn btn-secondary my-2">Clear title</button>
     <div>
       <%= f.label :title %>
-      <%= f.text_field :title, class: "form-control" %>
+      <%#= f.text_field :title, class: "form-control", data: { action: "form#enableSubmitButton", form_target: "input title" } %>
+      <input type="text" name="post[title]" id="post_title" class="form-control" data-action="form#enableSubmitButton" data-form-target="input titleInput" value="<%= post.title %>">
     </div>
     <div>
       <%= f.label :content %>
-      <%= f.text_area :content, class: "form-control" %>
+      <%= f.text_area :content, class: "form-control", data: { action: "form#enableSubmitButton", form_target: "input" } %>
     </div>
     <div>
       <%= f.label :status %>
@@ -30,6 +32,6 @@
       <% end %>
     </div>
 
-    <%= f.submit class: "btn btn-primary" %>
+    <%= f.submit class: "btn btn-primary", disabled: true, data: { form_target: "submitButton" } %>
   </div>
 <% end %>
