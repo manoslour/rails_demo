@@ -1,9 +1,12 @@
 <div class="container pt-4">
   <div class="row justify-content-center">
     <div class="col-lg-6">
-      <h1>Editing post</h1>
+      <%= turbo_frame_tag @post do %>
+        <h1>Editing post</h1>
 
-      <%= render "posts/form", post: @post %>
+        <%= render "posts/form", post: @post %>
+        <%= link_to "Back to posts", root_path %>
+      <% end %>
     </div>
   </div>
 </div>

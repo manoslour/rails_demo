@@ -3,6 +3,11 @@
     <div class="col-lg-6">
       <h1>New post</h1>
 
+      <turbo-frame id="posts-test">
+        This is inside a turbo frame in posts/new view<br>
+        <%= link_to "Back to posts", posts_path %>
+      </turbo-frame>
+
       <%= render "posts/form", post: @post %>
     </div>
   </div>

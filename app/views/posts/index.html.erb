@@ -1,8 +1,11 @@
 <div class="container pt-4">
   <h1>Posts</h1>
-  <%#= render @posts %>
   <div class="row">
-    <%= render partial: "posts/post", collection: @posts, as: :post %>
+    <%#= render @posts %>
+    <%#= render partial: "posts/post", collection: @posts, as: :post %>
+    <% @posts.each do |singe_post| %>
+      <%= render "posts/post", post: singe_post %>
+    <% end %>
   </div>
   <hr>
   <%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
