@@ -16,9 +16,10 @@
       <% end %>
       <hr>
       <h3>Comments</h3>
-      <div class="d-grid gap-2 mb-5">
+      <%= turbo_stream_from [@post, :comments] %>
+      <div class="d-grid gap-2 mb-5" id="comments">
         <% if @post.comments.present? %>
-          <%= render @post.comments %>
+          <%= render @post.comments.order(created_at: :desc) %>
         <% else %>
           <p class="text-muted small">No comments on this post yet</p>
         <% end %>
