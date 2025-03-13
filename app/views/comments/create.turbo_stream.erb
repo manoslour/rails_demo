@@ -1,0 +1,8 @@
+<%#= turbo_stream.update "new-comment" do %>
+  <%#= render partial: "comments/form", locals: { comment: @commentable.comments.build } %>
+<%# end %>
+<turbo-stream action="update" target="new-comment">
+  <template>
+    <%= render partial: "comments/form", locals: { comment: @commentable.comments.build } %>
+  </template>
+</turbo-stream>

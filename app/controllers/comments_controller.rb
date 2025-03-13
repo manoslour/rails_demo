@@ -4,12 +4,13 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user
-    commentable = @comment.commentable
-    if commentable.is_a?(Post) && commentable.draft?
+    @commentable = @comment.commentable
+    if @commentable.is_a?(Post) && @commentable.draft?
       return redirect_to root_path, notice: "Something went wrong"
     end
     if @comment.save
-      redirect_to post_path(@comment.commentable), notice: "Comment created successfully"
+      # redirect_to post_path(@comment.commentable), notice: "Comment created successfully"
+      # render turbo_stream: turbo_stream.update("new-comment", partial: "comments/form", locals: { comment: @commentable.comments.build })
     else
       redirect_to post_path(@comment.commentable), alert: "Comment could not be created"
     end
