@@ -3,8 +3,8 @@
   <div class="row">
     <%#= render @posts %>
     <%#= render partial: "posts/post", collection: @posts, as: :post %>
-    <% @posts.each do |singe_post| %>
-      <%= render "posts/post", post: singe_post %>
+    <%= turbo_frame_tag "long-list", src: list_posts_path do %>
+      Loading...
     <% end %>
   </div>
   <hr>

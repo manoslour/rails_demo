@@ -10,6 +10,11 @@ class PostsController < ApplicationController
   end
 
   def index
+
+  end
+
+  def list
+    sleep 5
     @posts = current_user.posts.includes(:user, :sections).all
   end
 
@@ -39,7 +44,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to posts_path
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 

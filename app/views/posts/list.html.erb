@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "long-list" do %>
+  <% @posts.each do |singe_post| %>
+    <%= render "posts/post", post: singe_post %>
+  <% end %>
+<% end %>

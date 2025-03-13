@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "module5", to: 'home#module5'
 
   get "/posts", to: "posts#index"
+  get "/list", to: "posts#list", as: :list_posts
   post "/posts", to: "posts#create"
   get "/posts/new", to: "posts#new", as: :new_post
   get "/posts/:id/edit", to: "posts#edit", as: :edit_post

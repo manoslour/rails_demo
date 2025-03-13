@@ -1,6 +1,6 @@
 <% post ||= @post %>
 
-<%= form_with model: post do |f| %>
+<%= form_with model: post, data: { turbo: false } do |f| %>
   <% f.object.errors.full_messages.each do |message| %>
     <div class="alert alert-danger">
       <%= message %>

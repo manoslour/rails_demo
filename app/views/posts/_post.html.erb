@@ -4,8 +4,9 @@
       <%= turbo_frame_tag post do %>
         <h2><%= post.title %></h2>
         <p class="text-muted small">by: <%= post.user_email %></p>
-        <%= link_to "Read more", post_path(post), class: "btn btn-link" %>
-        <%= link_to "Edit post", edit_post_path(post) if current_user.present? && current_user == post.user %>
+        <%= link_to "Read more", post_path(post), class: "btn btn-link", data: { turbo: false } %>
+        <!-- <a href="/posts/<%#= post.id %>" class="btn btn-link" data-turbo="false">Read more</a> -->
+        <%= link_to "Edit post", edit_post_path(post), data: { turbo_frame: "all-posts" } if current_user.present? && current_user == post.user %>
       <% end %>
     </div>
   </div>
