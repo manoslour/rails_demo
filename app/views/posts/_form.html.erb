@@ -1,6 +1,6 @@
 <% post ||= @post %>
 
-<%= form_with model: post, data: { turbo: false, controller: "form", form_title_value: "Some title from js data value" } do |f| %>
+<%= form_with model: post, data: { controller: "form", form_title_value: "Some title from js data value" } do |f| %>
   <% f.object.errors.full_messages.each do |message| %>
     <div class="alert alert-danger">
       <%= message %>
@@ -24,14 +24,15 @@
     </div>
 
     <div>
-      <%= f.fields_for :sections do |section_f| %>
-        <div>
-          <%= section_f.label :content %>
-          <%= section_f.text_area :content, class: 'form-control' %>
-        </div>
-      <% end %>
+      <h5>Sections</h5>
+      <div id="sections">
+        <%= f.fields_for :sections, f.object.sections do |section_f| %>
+          <%= render "sections/fields", f: section_f %>
+        <% end %>
+      </div>
+      <%= link_to "Add section", new_post_section_path(post), data: { turbo_stream: true, disable_with: "Loading" } %>
     </div>
 
-    <%= f.submit class: "btn btn-primary", disabled: true, data: { form_target: "submitButton" } %>
+    <%= f.submit class: "btn btn-primary", disabled: true, data: { form_target: "submitButton", turbo: false } %>
   </div>
 <% end %>

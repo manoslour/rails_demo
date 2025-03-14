@@ -1,0 +1,5 @@
+<%= turbo_stream.append "sections" do %>
+  <%= fields_for "post[sections_attributes]", Section.new, index: Time.now.to_i do |f| %>
+    <%= render "sections/fields", f: f %>
+  <% end %>
+<% end %>

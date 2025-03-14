@@ -33,11 +33,7 @@ class PostsController < ApplicationController
 
   def show; end
 
-  def edit
-    if @post.sections.empty?
-      3.times { @post.sections.build }
-    end
-  end
+  def edit; end
 
   def update
     if @post.update(post_params)
@@ -62,7 +58,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.expect(post: [:title, :content, :status, sections_attributes: [[:id, :content, :type]] ])
+    params.expect(post: [:title, :content, :status, sections_attributes: [ [:id, :content, :type] ] ])
   end
 
   def check_owner
