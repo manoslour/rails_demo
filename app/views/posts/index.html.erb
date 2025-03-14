@@ -1,12 +1,10 @@
 <div class="container pt-4">
   <h1>Posts</h1>
-  <div class="row">
-    <%#= render @posts %>
-    <%#= render partial: "posts/post", collection: @posts, as: :post %>
-    <%= turbo_frame_tag "long-list", src: list_posts_path do %>
-      Loading...
-    <% end %>
-  </div>
+  <%#= render @posts %>
+  <%#= render partial: "posts/post", collection: @posts, as: :post %>
+  <%= turbo_frame_tag "long-list", src: list_posts_path do %>
+    Loading...
+  <% end %>
   <hr>
   <%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
 </div>

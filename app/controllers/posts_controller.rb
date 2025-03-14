@@ -14,7 +14,6 @@ class PostsController < ApplicationController
   end
 
   def list
-    sleep 5
     @posts = current_user.posts.includes(:user, :sections).all
   end
 
