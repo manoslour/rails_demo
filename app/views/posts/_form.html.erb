@@ -1,6 +1,6 @@
 <% post ||= @post %>
 
-<%= form_with model: post, data: { controller: "form", form_title_value: "Some title from js data value" } do |f| %>
+<%= form_with model: post, data: { controller: "form", form_title_value: post.title } do |f| %>
   <% f.object.errors.full_messages.each do |message| %>
     <div class="alert alert-danger">
       <%= message %>
@@ -10,8 +10,7 @@
     <button type="button" data-action="form#clearTitle" class="btn btn-secondary my-2">Clear title</button>
     <div>
       <%= f.label :title %>
-      <%#= f.text_field :title, class: "form-control", data: { action: "form#enableSubmitButton", form_target: "input title" } %>
-      <input type="text" name="post[title]" id="post_title" class="form-control" data-action="form#enableSubmitButton" data-form-target="input titleInput" value="<%= post.title %>">
+      <%= f.text_field :title, class: "form-control", data: { action: "form#enableSubmitButton", form_target: "input title" } %>
     </div>
     <div>
       <%= f.label :content %>
