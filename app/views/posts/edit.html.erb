@@ -5,7 +5,7 @@
         <h1>Editing post</h1>
 
         <%= render "posts/form", post: @post %>
-        <%= link_to "Back to posts", root_path %>
+        <%= link_to "Back to posts", root_path, data: { turbo: false } %>
       <% end %>
     </div>
   </div>
