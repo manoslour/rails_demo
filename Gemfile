@@ -74,3 +74,5 @@ gem "dartsass-rails", "~> 0.5.1"
 gem "bootstrap", "~> 5.3"
 
 gem "devise", "~> 4.9"
+
+gem "dotenv", "~> 3.1", groups: [:development, :test]
